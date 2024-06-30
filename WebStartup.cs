@@ -55,11 +55,11 @@ namespace PrintService
 
                 // 使用控制器
                 app.MapControllers();
-                
-             
-                app.Run();
 
-                log.Info("》》》》》服务启动完成》》》》》");
+                log.Info("》》》》》服务启动完成 🚀🚀🚀🚀🚀🚀🚀🚀 》》》》》");
+
+                app.Run();
+         
 
             });
 

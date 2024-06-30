@@ -18,6 +18,7 @@ namespace PrintService.ViewModels
         public WebStartup WebStartup = new WebStartup();
 
         public ICommand OpenServer { get; }
+        public ICommand InitDatabase { get; }
 
 
 
@@ -30,6 +31,7 @@ namespace PrintService.ViewModels
             BasicConfigurator.Configure(logAppender);
 
             OpenServer = new RelayCommand(openWebServer);
+            InitDatabase = new RelayCommand(initDatabase);
         }
 
         private void openWebServer()
@@ -37,6 +39,19 @@ namespace PrintService.ViewModels
             LogHelper.Info("正在开启web服务=====");
             WebStartup.StartServer("localhost", null);
             LogHelper.Info("启动web服务完成》》》》》》》》》》》》");
+        }
+        private void initDatabase()
+        {
+            LogHelper.Info(LogHelper.WPF_SHOW_START + "正在初始化数据库 🚀 🚀 🚀");
+            try
+            {
+                App.printBll.InitTable();
+                LogHelper.Info(LogHelper.WPF_SHOW_START + " 🚀 🚀 🚀 数据库初始化完成》》》》》》》》》》》》");
+            }catch(Exception ex)
+            {
+                LogHelper.Error(LogHelper.WPF_SHOW_START + " 😭 😭 😭 数据库初始失败》》》》》》》》》》》》", ex);
+            }
+           
         }
 
         // 日志处理界面显示

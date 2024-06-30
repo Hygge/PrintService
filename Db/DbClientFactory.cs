@@ -7,7 +7,7 @@ namespace PrintService.Db
     public class DbClientFactory
     {
 
-        public static readonly string ConnectionStringSettings = Path.Combine(Environment.CurrentDirectory, "printService.db");
+        public static readonly string ConnectionStringSettings = "DataSource=" + Path.Combine(Environment.CurrentDirectory, "printService.db");
 
       
 

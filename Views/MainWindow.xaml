@@ -9,5 +9,6 @@
     <Grid>
 
         <Button Content="测试打开web服务" Width="200" Height="100" Command="{Binding ViewModel.OpenServer}" />
+        <Button Content="初始化数据库" Width="200" Height="100" Command="{Binding ViewModel.InitDatabase}" Margin="299,43,301,292" />
     </Grid>
 </Window>
