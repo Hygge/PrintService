@@ -5,10 +5,188 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintService"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow"
+        Height="669"
+        Width="998">
+    <Window.Resources>
+        <!--下拉列表样式-->
+        <Style TargetType="ComboBox"
+               x:Key="cbbip">
+            <Setter Property="Width"
+                    Value="180" />
+            <Setter Property="Height"
+                    Value="36" />
+            <Setter Property="Text"
+                    Value="请选择服务器IP" />
+        </Style>
+        <!--端口输入框样式-->
+        <Style TargetType="TextBox"
+               x:Key="txtport">
+            <Setter Property="Width"
+                    Value="173" />
+            <Setter Property="Height"
+                    Value="36" />
+            <Setter Property="Text"
+                    Value="请输入端口，默认8888" />
 
-        <Button Content="测试打开web服务" Width="200" Height="100" Command="{Binding ViewModel.OpenServer}" />
-        <Button Content="初始化数据库" Width="200" Height="100" Command="{Binding ViewModel.InitDatabase}" Margin="299,43,301,292" />
+        </Style>
+        <!--按钮样式-->
+        <Style TargetType="Button"
+               x:Key="btn">
+            <Setter Property="Width"
+                    Value="112" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Background"
+                    Value="#336FFF" />
+
+
+        </Style>
+
+        <!--测试打印按钮样式-->
+        <Style TargetType="Button"
+               x:Key="btntest">
+            <Setter Property="Width"
+                    Value="157" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Background"
+                    Value="#336FFF" />
+
+
+        </Style>
+        <!--输入框样式-->
+        <Style TargetType="TextBlock"
+               x:Key="logTxt">
+            <Setter Property="Background"
+                    Value="#C4C4C4" />
+            <Setter Property="Width"
+                    Value="492" />
+            <Setter Property="Height"
+                    Value="285" />
+            <Setter Property="Margin"
+                    Value="49" />
+        </Style>
+        <!--添加按钮样式-->
+        <Style TargetType="Button"
+               x:Key="btnadd">
+            <Setter Property="Width"
+                    Value="264" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Background"
+                    Value="#336FFF" />
+
+
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ComboBox Grid.Row="0"
+                  Grid.Column="0"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Style="{StaticResource cbbip}">
+
+
+
+        </ComboBox>
+        <TextBox Grid.Row="0"
+                 Grid.Column="1"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 Style="{StaticResource txtport}">
+
+        </TextBox>
+        <Button Grid.Row="0"
+                Grid.Column="2"
+                Content="启动服务"
+                Style="{StaticResource btn}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Grid.Row="0"
+                Grid.Column="3"
+                Content="停止服务"
+                Style="{StaticResource btn}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <ComboBox Grid.Row="1"
+                  Grid.Column="0"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Style="{StaticResource cbbip}" />
+        <ComboBox Grid.Row="1"
+                  Grid.Column="1"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Style="{StaticResource cbbip}" />
+        <Button Grid.Row="1"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Content="测试打印"
+                Style="{StaticResource btntest}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Grid.ColumnSpan="2"
+                   Grid.RowSpan="2"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Style="{StaticResource logTxt}">
+
+        </TextBlock>
+        <Button Grid.Row="2"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Content="添加打印机列表"
+                Style="{StaticResource btnadd}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Grid.Row="3"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                Content="添加模板列表"
+                Style="{StaticResource btnadd}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius"
+                            Value="20"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
     </Grid>
 </Window>
