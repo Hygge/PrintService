@@ -27,6 +27,15 @@ namespace PrintService.Bll
             db.CodeFirst.InitTables(typeof(Printer), typeof(LabelFileInfo));
         }
 
+        public LabelFileInfo SelectByLabelName(string name)
+        {
+            return DbClientFactory.GetSqlSugarClient().Queryable<LabelFileInfo>().Where( x => x.name.Equals(name)).Single();
+        }
+
+        public Printer SelectByPrinterName(string name)
+        {
+            return DbClientFactory.GetSqlSugarClient().Queryable<Printer>().Where( x => x.name.Equals(name)).Single();
+        }
 
         public List<LabelFileInfo> SelectLabelFileList()
         {
