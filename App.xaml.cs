@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using PrintService.Log;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -11,6 +12,7 @@ namespace PrintService
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            LogHelper.EnableDefault();
             base.OnStartup(e);
             Application.Current.StartupUri = new Uri("/Views/MainWindow.xaml", UriKind.Relative);
 

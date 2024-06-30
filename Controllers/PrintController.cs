@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using log4net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+using PrintService.Log;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,26 +13,27 @@ namespace PrintService.Controllers
     [ApiController]
     public class PrintController : ControllerBase
     {
-        public readonly ILogger<PrintController> logger;
+        private readonly ILog log = LogManager.GetLogger(typeof(PrintController));
 
-        public PrintController(ILogger<PrintController> logger)
+        public PrintController()
         {
-            this.logger = logger;
+
         }
 
         [HttpGet]
-        public string test()
+        public Result test()
         {
-
-            return "测试请求";
+            log.Info(LogHelper.WPF_SHOW_START + "test>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            LogHelper.Info(LogHelper.WPF_SHOW_START + "test>>>>>>>>>>>>>>>>>>>>>>>>>>>1111>>>>>>>>>>>>>>>>>>>");
+            return new Result(0, "测试请求");
 
         }
 
         [HttpPost]
-        public string printLabel([FromBody] PrintDataDTO dTO)
+        public Result printLabel([FromBody] PrintDataDTO dTO)
         {
 
-            return $"{dTO}";
+            return new Result(0, "测试请求");
         }
 
 
@@ -44,6 +45,9 @@ namespace PrintService.Controllers
     /// </summary>
     /// <param name="printName">打印机名称</param>
     /// <param name="param">模板变量数据(json字符串)</param>
-    public record PrintDataDTO(string printName, string? param);
+    /// <param name="count">打印次数</param>
+    public record PrintDataDTO(string printName, string? param, int? count);
+
+    public record Result(int code,  string? message, object data = null);
 
 }
