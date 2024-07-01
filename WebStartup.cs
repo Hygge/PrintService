@@ -17,7 +17,7 @@ namespace PrintService
 
         public WebApplication app { set; get; }
 
-        public void StartServer(string ip, int? port)
+        public void StartServer(string? ip, int? port)
         {
             Task.Run(() =>
             {
@@ -45,9 +45,10 @@ namespace PrintService
 
                 app = builder.Build();
 
-                int p = port == null ? 8888 : (int)port;
+                int p = port == null || port == 0 ? 8888 : (int)port;
+                string i = ip == null ? "localhost" : ip;
                 // 指定服务访问地址
-                app.Urls.Add($"http://{ip}:{p}");
+                app.Urls.Add($"http://{i}:{p}");
 
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -64,6 +65,12 @@ namespace PrintService
             });
 
 
+        }
+
+
+        public void StopServer()
+        {
+            app.StopAsync();
         }
 
 

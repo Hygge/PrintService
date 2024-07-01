@@ -5,7 +5,9 @@ using log4net.Layout;
 using PrintService.Log;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,8 +21,32 @@ namespace PrintService.ViewModels
 
         public ICommand OpenServer { get; }
         public ICommand InitDatabase { get; }
+        public ICommand StopServer { get; }
 
-
+        private string ip;
+        public string Ip
+        {
+            get => ip;
+            set => SetProperty(ref ip, value);
+        }
+        private int port;
+        public int Port
+        {
+            get => port;
+            set => SetProperty(ref port, value);
+        }
+        private ObservableCollection<string> ipList = new ObservableCollection<string>();
+        public ObservableCollection<string> IpList
+        {
+            get => ipList;
+            set => SetProperty(ref ipList, value);
+        }
+        private bool isEnabled = true;
+        public bool IsEnabled
+        {
+            get => isEnabled;
+            set => SetProperty(ref isEnabled, value);
+        }
 
         public MainWindowViewModel()
         {
@@ -32,14 +58,31 @@ namespace PrintService.ViewModels
 
             OpenServer = new RelayCommand(openWebServer);
             InitDatabase = new RelayCommand(initDatabase);
+            StopServer = new RelayCommand(stopServer);
+
+            // 获取本机静态ip
+            refreshNetwork();
         }
 
         private void openWebServer()
         {
-            LogHelper.Info("正在开启web服务=====");
-            WebStartup.StartServer("localhost", null);
-            LogHelper.Info("启动web服务完成》》》》》》》》》》》》");
+
+            LogHelper.Info(LogHelper.WPF_SHOW_START + "正在开启web服务=====");
+            WebStartup.StartServer(Ip, Port);
+            IsEnabled = false;
+            LogHelper.Info(LogHelper.WPF_SHOW_START + "启动web服务完成 🚀 🚀 🚀 》》》》》》》》》");
         }
+        private void stopServer()
+        {
+            if (!IsEnabled)
+            {
+                WebStartup.StopServer();
+                IsEnabled = true;
+                LogHelper.Info(LogHelper.WPF_SHOW_START + "停止web服务完成 🚀 🚀 🚀 》》》》》》》");
+            }
+          
+        }
+
         private void initDatabase()
         {
             LogHelper.Info(LogHelper.WPF_SHOW_START + "正在初始化数据库 🚀 🚀 🚀");
@@ -70,6 +113,43 @@ namespace PrintService.ViewModels
                 }));
             }
        
+        }
+
+        /// <summary>
+        /// 刷新网卡
+        /// </summary>
+        private void refreshNetwork()
+        {
+            IpList.Clear();
+            // 获取本机的所有网络接口
+            NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (NetworkInterface networkInterface in networkInterfaces)
+            {
+                // 排除虚拟网络接口和回环接口
+                if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
+                    networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+                {
+                    // 获取网络接口的IP属性
+                    IPInterfaceProperties properties = networkInterface.GetIPProperties();
+
+                    // 获取该接口的所有IP地址
+                    foreach (IPAddressInformation address in properties.UnicastAddresses)
+                    {
+                        // 输出IPv4地址
+                        if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            IpList.Add(Convert.ToString(address.Address));
+                        }
+                        // 输出IPv6地址
+                        else if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                        {
+                            //Debug.WriteLine($"IPv6 Address: {address.Address}");
+                        }
+                    }
+                }
+            }
+
         }
 
     }

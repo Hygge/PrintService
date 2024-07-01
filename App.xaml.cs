@@ -22,6 +22,12 @@ namespace PrintService
             Application.Current.StartupUri = new Uri("/Views/MainWindow.xaml", UriKind.Relative);
 
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            Environment.Exit(0);
+        }
     }
 
 }

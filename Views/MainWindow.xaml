@@ -99,6 +99,8 @@
                   Grid.Column="0"
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
+                  ItemsSource="{Binding ViewModel.IpList}"
+                  SelectedItem="{Binding ViewModel.Ip, Mode=TwoWay}"
                   Style="{StaticResource cbbip}">
 
 
@@ -108,12 +110,16 @@
                  Grid.Column="1"
                  HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center"
+                 Text="{Binding ViewModel.Port}"
                  Style="{StaticResource txtport}">
 
         </TextBox>
         <Button Grid.Row="0"
                 Grid.Column="2"
                 Content="启动服务"
+                Command="{Binding ViewModel.OpenServer}"
+                IsEnabled="{Binding ViewModel.IsEnabled}"
+                x:Name="openBtn"
                 Style="{StaticResource btn}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -125,11 +131,26 @@
         <Button Grid.Row="0"
                 Grid.Column="3"
                 Content="停止服务"
+                Command="{Binding ViewModel.StopServer}"                
+                x:Name="stopBtn"
                 Style="{StaticResource btn}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius"
                             Value="20"></Setter>
+                </Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <!-- 数据触发器，监控Button1的IsPressed属性 -->
+                        <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="True">
+                            <!-- 当Button1被按下时，禁用Button2 -->
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <!-- 可选：添加另一个触发器来在Button1未被按下的时候启用Button2 -->
+                        <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="False">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </Button.Resources>
         </Button>
