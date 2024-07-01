@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using log4net.Config;
 using log4net.Layout;
+using PrintService.Domain;
 using PrintService.Log;
 using System;
 using System.Collections.Generic;
@@ -22,14 +23,15 @@ namespace PrintService.ViewModels
         public ICommand OpenServer { get; }
         public ICommand InitDatabase { get; }
         public ICommand StopServer { get; }
+        public ICommand AddPrinter { get; }
 
-        private string ip;
+        private string ip ;
         public string Ip
         {
             get => ip;
             set => SetProperty(ref ip, value);
         }
-        private int port;
+        private int port = 8888;
         public int Port
         {
             get => port;
@@ -47,6 +49,44 @@ namespace PrintService.ViewModels
             get => isEnabled;
             set => SetProperty(ref isEnabled, value);
         }
+        /// <summary>
+        /// 标签名称集合
+        /// </summary>
+        private ObservableCollection<string> labelNameList = new ObservableCollection<string>();
+        public ObservableCollection<string> LabelNameList
+        {
+            get => labelNameList;
+            set => SetProperty(ref labelNameList, value);
+        }
+        /// <summary>
+        /// 选中需要打印的标签名称
+        /// </summary>
+        private string labelName;
+        public string LabelName
+        {
+            get => labelName;
+            set => SetProperty(ref labelName, value);
+        }
+
+        /// <summary>
+        /// 打印机集合
+        /// </summary>
+        private ObservableCollection<string> printNameList = new ObservableCollection<string>();
+        public ObservableCollection<string> PrintNameList
+        { 
+            get => printNameList;
+            set => SetProperty(ref printNameList,value);
+        }
+
+        /// <summary>
+        /// 选中需要的打印机名称
+        /// </summary>
+        private string printName;
+        public string PrintName
+        {
+            get => printName;
+            set =>SetProperty(ref printName, value);
+        }
 
         public MainWindowViewModel()
         {
@@ -59,11 +99,44 @@ namespace PrintService.ViewModels
             OpenServer = new RelayCommand(openWebServer);
             InitDatabase = new RelayCommand(initDatabase);
             StopServer = new RelayCommand(stopServer);
+            AddPrinter = new RelayCommand(addPrinter);
 
             // 获取本机静态ip
             refreshNetwork();
+            // 数据库是否初始化判断，如果未初始化先初始化数据库后再加载
+
+            // 初始化获取标签名称集合
+            getLabelNameList();
+
+            //初始化获取打印机集合
+            getPrintNameList();
         }
 
+       
+        /// <summary>
+        /// 获取标签名称集合
+        /// </summary>
+        private void getLabelNameList()
+        {
+            List<LabelFileInfo> list = App.printBll.SelectLabelFileList();
+            foreach (var item in list)
+            {
+                LabelNameList.Add(item.name);
+            }
+        }
+
+        /// <summary>
+        /// 获取打印机名称集合
+        /// </summary>
+        private void getPrintNameList()
+        {
+            List<Printer> list = App.printBll.SelectPrinterList();
+            foreach (var item in list)
+            {
+                printNameList.Add(item.name);
+            }
+        }
+        //启动服务
         private void openWebServer()
         {
 
@@ -72,6 +145,7 @@ namespace PrintService.ViewModels
             IsEnabled = false;
             LogHelper.Info(LogHelper.WPF_SHOW_START + "启动web服务完成 🚀 🚀 🚀 》》》》》》》》》");
         }
+        //停止服务
         private void stopServer()
         {
             if (!IsEnabled)
@@ -82,7 +156,20 @@ namespace PrintService.ViewModels
             }
           
         }
-
+        /// <summary>
+        /// 添加打印机
+        /// </summary>
+        private void addPrinter()
+        {
+            Printer printer = new Printer();
+            printer.name = "a12123";
+            printer.description = "测试打印机";
+            printer.address = "123";
+            App.printBll.InsertPrinter(printer);
+        }
+        /// <summary>
+        /// 初始化数据库
+        /// </summary>
         private void initDatabase()
         {
             LogHelper.Info(LogHelper.WPF_SHOW_START + "正在初始化数据库 🚀 🚀 🚀");

@@ -28,7 +28,6 @@
                     Value="36" />
             <Setter Property="Text"
                     Value="请输入端口，默认8888" />
-
         </Style>
         <!--按钮样式-->
         <Style TargetType="Button"
@@ -39,10 +38,7 @@
                     Value="40" />
             <Setter Property="Background"
                     Value="#336FFF" />
-
-
         </Style>
-
         <!--测试打印按钮样式-->
         <Style TargetType="Button"
                x:Key="btntest">
@@ -52,8 +48,6 @@
                     Value="40" />
             <Setter Property="Background"
                     Value="#336FFF" />
-
-
         </Style>
         <!--输入框样式-->
         <Style TargetType="TextBlock"
@@ -76,11 +70,7 @@
                     Value="40" />
             <Setter Property="Background"
                     Value="#336FFF" />
-
-
         </Style>
-
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -99,12 +89,11 @@
                   Grid.Column="0"
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
+                  Text="请输入服务IP"
                   ItemsSource="{Binding ViewModel.IpList}"
                   SelectedItem="{Binding ViewModel.Ip, Mode=TwoWay}"
+                  
                   Style="{StaticResource cbbip}">
-
-
-
         </ComboBox>
         <TextBox Grid.Row="0"
                  Grid.Column="1"
@@ -112,7 +101,6 @@
                  VerticalContentAlignment="Center"
                  Text="{Binding ViewModel.Port}"
                  Style="{StaticResource txtport}">
-
         </TextBox>
         <Button Grid.Row="0"
                 Grid.Column="2"
@@ -141,12 +129,12 @@
                 </Style>
                 <Style TargetType="Button">
                     <Style.Triggers>
-                        <!-- 数据触发器，监控Button1的IsPressed属性 -->
+                         <!--数据触发器，监控openBtn的IsPressed属性--> 
                         <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="True">
-                            <!-- 当Button1被按下时，禁用Button2 -->
+                             <!--当openBtn被按下时，禁用stopBtn--> 
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
-                        <!-- 可选：添加另一个触发器来在Button1未被按下的时候启用Button2 -->
+                         <!--可选：添加另一个触发器来在openBtn未被按下的时候启用stopBtn--> 
                         <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="False">
                             <Setter Property="IsEnabled" Value="True"/>
                         </DataTrigger>
@@ -158,11 +146,15 @@
                   Grid.Column="0"
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
+                  ItemsSource="{Binding ViewModel.LabelNameList}"
+                  SelectedItem="{Binding ViewModel.LabelName, Mode=TwoWay}"
                   Style="{StaticResource cbbip}" />
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
+                  ItemsSource="{Binding ViewModel.PrintNameList}"
+                  SelectedItem="{Binding ViewModel.PrintName, Mode=TwoWay}"
                   Style="{StaticResource cbbip}" />
         <Button Grid.Row="1"
                 Grid.Column="2"    
@@ -178,6 +170,7 @@
         <Button Grid.Row="1"
                 Grid.Column="3"
                 Content="初始化数据库"
+                Command="{Binding ViewModel.InitDatabase}"
                 Style="{StaticResource btntest}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -191,7 +184,6 @@
                    Grid.Row="2"
                    Grid.Column="0"
                    Style="{StaticResource logTxt}">
-
         </TextBlock>
         <Button Grid.Row="2"
                 Grid.Column="2"
@@ -217,7 +209,5 @@
                 </Style>
             </Button.Resources>
         </Button>
-
-
     </Grid>
 </Window>
