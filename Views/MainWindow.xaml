@@ -53,6 +53,8 @@
                     Value="40" />
             <Setter Property="Background"
                     Value="#336FFF" />
+            <Setter Property="Foreground"
+                    Value="White" />
         </Style>
         <!--测试打印按钮样式-->
         <Style TargetType="Button"
@@ -63,6 +65,8 @@
                     Value="40" />
             <Setter Property="Background"
                     Value="#336FFF" />
+            <Setter Property="Foreground"
+                    Value="White" />
         </Style>
         <!--输入框样式-->
         <Style TargetType="TextBlock"
@@ -104,10 +108,8 @@
                   Grid.Column="0"
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
-                  Text="请输入服务IP"
                   ItemsSource="{Binding ViewModel.IpList}"
                   SelectedItem="{Binding ViewModel.Ip, Mode=TwoWay}"
-                  
                   Style="{StaticResource cbbip}">
         </ComboBox>
         <TextBox Grid.Row="0"
@@ -184,8 +186,8 @@
         </Button>
         <Button Grid.Row="1"
                 Grid.Column="3"
-                Content="初始化数据库"
-                Command="{Binding ViewModel.InitDatabase}"
+                Content="刷        新"
+               
                 Style="{StaticResource btntest}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
