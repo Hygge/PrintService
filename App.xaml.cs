@@ -19,7 +19,7 @@ namespace PrintService
             // 启用日志
             LogHelper.EnableDefault();
             base.OnStartup(e);
-            Application.Current.StartupUri = new Uri("/Views/MainWindow.xaml", UriKind.Relative);
+            Application.Current.StartupUri = new Uri("/Views/AddLableTemplate.xaml", UriKind.Relative);
 
         }
 
