@@ -111,7 +111,8 @@ namespace PrintService.ViewModels
 
             // 获取本机静态ip
             refreshNetwork();
-            // 数据库是否初始化判断，如果未初始化先初始化数据库后再加载
+            // 数据库初始
+            initDatabase();
 
             // 初始化获取标签名称集合
             getLabelNameList();
