@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:PrintService"
         mc:Ignorable="d"
         Title="MainWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Height="669"
         Width="998">
     <Window.Resources>
@@ -189,6 +191,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Content="添加打印机列表"
+                Command="{Binding ViewModel.AddPrinter}"
                 Style="{StaticResource btnadd}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -201,6 +204,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Content="添加模板列表"
+                Command="{Binding ViewModel.AddLableTemplate}"
                 Style="{StaticResource btnadd}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

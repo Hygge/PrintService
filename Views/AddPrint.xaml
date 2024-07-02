@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:PrintService.Views"
         mc:Ignorable="d"
         Title="添加打印机"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Height="392"
         Width="545">
     <Window.Resources>
