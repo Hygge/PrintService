@@ -4,6 +4,7 @@ using log4net.Config;
 using log4net.Layout;
 using PrintService.Domain;
 using PrintService.Log;
+using PrintService.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,10 +21,16 @@ namespace PrintService.ViewModels
     {
         public WebStartup WebStartup = new WebStartup();
 
+        //启动服务
         public ICommand OpenServer { get; }
+        //初始化数据
         public ICommand InitDatabase { get; }
+        //停止服务
         public ICommand StopServer { get; }
+        //添加打印机标签
         public ICommand AddPrinter { get; }
+        //添加打印模板
+        public ICommand AddLableTemplate { get; }
 
         private string ip ;
         public string Ip
@@ -100,6 +107,7 @@ namespace PrintService.ViewModels
             InitDatabase = new RelayCommand(initDatabase);
             StopServer = new RelayCommand(stopServer);
             AddPrinter = new RelayCommand(addPrinter);
+            AddLableTemplate = new RelayCommand(addLableTemplate);
 
             // 获取本机静态ip
             refreshNetwork();
@@ -112,7 +120,9 @@ namespace PrintService.ViewModels
             getPrintNameList();
         }
 
-       
+      
+
+
         /// <summary>
         /// 获取标签名称集合
         /// </summary>
@@ -161,11 +171,23 @@ namespace PrintService.ViewModels
         /// </summary>
         private void addPrinter()
         {
+            AddPrint print = new AddPrint();
+            print.Show();
             Printer printer = new Printer();
             printer.name = "a12123";
             printer.description = "测试打印机";
             printer.address = "123";
             App.printBll.InsertPrinter(printer);
+        }
+        /// <summary>
+        /// 添加打印模板
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private void addLableTemplate()
+        {
+            AddLableTemplate addLable = new AddLableTemplate();
+            addLable.Show();
+
         }
         /// <summary>
         /// 初始化数据库
