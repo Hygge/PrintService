@@ -2,6 +2,7 @@
 using PrintService.Log;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
 
 namespace PrintService
@@ -20,6 +21,12 @@ namespace PrintService
             LogHelper.EnableDefault();
             base.OnStartup(e);
             Application.Current.StartupUri = new Uri("/Views/MainWindow.xaml", UriKind.Relative);
+            string wwwroot = Path.Combine(Environment.CurrentDirectory, "wwwroot");
+            // 启动时创建模板文件路径
+            if (!Directory.Exists(wwwroot))
+            {
+                Directory.CreateDirectory(wwwroot);
+            }
 
         }
 
