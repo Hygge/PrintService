@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using PrintService.Domain;
 using PrintService.Log;
 using PrintService.Utils;
-using Swashbuckle.AspNetCore.Annotations;
 using System.IO;
 using System.Linq;
 using System.Text;
