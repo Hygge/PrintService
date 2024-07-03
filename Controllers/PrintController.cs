@@ -84,7 +84,8 @@ namespace PrintService.Controllers
             {
                 return new Result(1, "标签模板文件不能为空");
             }
-            if (!file.ContentType.Equals("frx"))
+            string[] strings = file.FileName.Split('.');
+            if ( strings.Length < 2 || !strings[1].Equals("frx"))
             {
                 return new Result(1, "标签模板文件类型错误");
             }
