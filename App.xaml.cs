@@ -1,4 +1,5 @@
-﻿using PrintService.Bll;
+﻿using Microsoft.Extensions.Configuration;
+using PrintService.Bll;
 using PrintService.Log;
 using System.Configuration;
 using System.Data;
@@ -13,13 +14,15 @@ namespace PrintService
     {
 
         public readonly static PrintBll printBll = new PrintBll();
+        public readonly static IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Environment.CurrentDirectory).AddJsonFile("AppSettings.json").Build();
 
         protected override void OnStartup(StartupEventArgs e)
         {
             // 启用日志
             LogHelper.EnableDefault();
             base.OnStartup(e);
-            Application.Current.StartupUri = new Uri("/Views/MainWindow.xaml", UriKind.Relative);
+            Application.Current.StartupUri = new Uri("/Views/MainView.xaml", UriKind.Relative);
 
         }
 
