@@ -7,18 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AddLabelView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AddLableTemplate.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AddPrint.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AddPrinterView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\AddLabelView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AddLableTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AddPrint.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddPrinterView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">

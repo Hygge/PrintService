@@ -94,7 +94,7 @@ namespace PrintService.Controllers
             {
                 return new Result(1, "标签名称已存在!");
             }
-            string filepath = Path.Combine(Environment.CurrentDirectory, "wwwroot", file.FileName);
+            string filepath = Path.Combine(Environment.CurrentDirectory, App.configuration["labelDir"], file.FileName);
             using Stream stream = file.OpenReadStream();
             using FileStream fileStream = new FileStream(filepath, FileMode.Create);
             stream.CopyToAsync(fileStream);

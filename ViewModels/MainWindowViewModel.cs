@@ -29,6 +29,7 @@ namespace PrintService.ViewModels
         public ICommand StopServer { get; }
         //添加打印机标签
         public ICommand AddPrinter { get; }
+        public ICommand AddLabel { get; }
         //添加打印模板
         public ICommand AddLableTemplate { get; }
 
@@ -108,6 +109,7 @@ namespace PrintService.ViewModels
             StopServer = new RelayCommand(stopServer);
             AddPrinter = new RelayCommand(addPrinter);
             AddLableTemplate = new RelayCommand(addLableTemplate);
+            AddLabel = new RelayCommand(addLabel);
 
             // 获取本机静态ip
             refreshNetwork();
@@ -172,14 +174,21 @@ namespace PrintService.ViewModels
         /// </summary>
         private void addPrinter()
         {
-            AddPrint print = new AddPrint();
+            AddPrinterView print = new AddPrinterView();
             print.Show();
             Printer printer = new Printer();
-            printer.name = "a12123";
+           /* printer.name = "a12123";
             printer.description = "测试打印机";
             printer.address = "123";
-            App.printBll.InsertPrinter(printer);
+            App.printBll.InsertPrinter(printer);*/
         }
+        private void addLabel()
+        {
+            AddLabelView print = new AddLabelView();
+            print.Show();
+        }
+
+
         /// <summary>
         /// 添加打印模板
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using PrintService.Bll;
+﻿using Microsoft.Extensions.Configuration;
+using PrintService.Bll;
 using PrintService.Log;
 using System.Configuration;
 using System.Data;
@@ -14,6 +15,8 @@ namespace PrintService
     {
 
         public readonly static PrintBll printBll = new PrintBll();
+        public readonly static IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Environment.CurrentDirectory).AddJsonFile("AppSettings.json").Build();
 
         protected override void OnStartup(StartupEventArgs e)
         {

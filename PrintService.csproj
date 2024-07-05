@@ -21,6 +21,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.160" />
+    <PackageReference Include="WPF-UI" Version="3.0.4" />
+    <PackageReference Include="WPF-UI.Tray" Version="3.0.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="AppSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="lib\FastReport.Bars.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
