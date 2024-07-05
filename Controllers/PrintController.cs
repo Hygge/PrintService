@@ -103,7 +103,7 @@ namespace PrintService.Controllers
             l.name = name;    
             l.description = desc;
             l.path = filepath;
-            l.url = Path.Combine("wwwroot", file.FileName);
+            l.url = Path.Combine(App.configuration["labelDir"], file.FileName);
             App.printBll.InsertLabelFile(l);
             log.Info($"{LogHelper.WPF_SHOW_START}添加新的标签模板 {name} 成功，地址{l.url}");
 

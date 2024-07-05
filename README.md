@@ -1,6 +1,6 @@
 ## 界面
 
-![MianWindow](\asset\MianWindow.png)
+![MianWindow](/asset/MianWindow.png)
 
 
 
