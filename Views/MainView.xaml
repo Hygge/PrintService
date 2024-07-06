@@ -54,11 +54,15 @@
             
             </ComboBox>
         </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" Margin="10,0,0,0">
+            <ui:Button Command="{Binding ViewModel.Print}"   Grid.Row="2" Grid.Column="2" Content="测试打印" Width="100"  Margin="30,20,0,20" Appearance="Primary" />
+            <ui:Button Command="{Binding ViewModel.Refresh}"  Grid.Row="2" Grid.Column="2" Content="刷新" Width="100"  Margin="20,20,0,20" Appearance="Primary" />
+        </StackPanel>
 
-        <ui:Button   Grid.Row="2" Grid.Column="2" Content="测试打印" Width="150"  Margin="60,20,0,20" Appearance="Primary" />
+        
         <TextBlock Grid.Row="3"  Text="打印日志："  VerticalAlignment="Center"   Margin="20,0,0,10"    />
-        <TextBox  Grid.Row="4"  Grid.Column="0" Grid.ColumnSpan="2" Margin="20,0,20,20" Height="260" TextWrapping="Wrap" Text="12312"        IsReadOnly="True"
-                        FontSize="12" >
+        <TextBox  Grid.Row="4"  Grid.Column="0" Grid.ColumnSpan="2" Margin="20,0,20,20" Width="450" Height="260" TextWrapping="Wrap" Text="{Binding ViewModel.Logs}"  
+                  IsReadOnly="True" FontSize="12" >
 
         </TextBox>
 

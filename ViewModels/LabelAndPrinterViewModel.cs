@@ -43,11 +43,20 @@ namespace PrintService.ViewModels
         }
         private void savePrinter()
         {
-            Printer printer = new Printer();
-            printer.address = LabelAndPrinterModel.PrinterAddress;
-            printer.name = LabelAndPrinterModel.PrinterName ;
-            printer.description = LabelAndPrinterModel.PrinterDescription ;
-            App.printBll.InsertPrinter(printer);
+            try
+            {
+                Printer printer = new Printer();
+                printer.address = LabelAndPrinterModel.PrinterAddress;
+                printer.name = LabelAndPrinterModel.PrinterName ;
+                printer.description = LabelAndPrinterModel.PrinterDescription ;
+                App.printBll.InsertPrinter(printer);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(LogHelper.WPF_SHOW_START + "添加打印机失败", ex);
+            }
+             
+            closeWindow();
         }
         private void saveLabel()
         {

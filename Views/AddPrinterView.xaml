@@ -20,22 +20,22 @@ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         <ui:TitleBar    Title="添加打印机"     Grid.Row="0" Grid.ColumnSpan="3"  Icon="pack://application:,,,/WpfUi;component/assert/favicon.ico" />
         <StackPanel Grid.Row="1"  Orientation="Horizontal" Margin="10,0,0,0">
             <ui:TextBlock Text="打印机名称："   VerticalAlignment="Center"  Margin="20,20,0,20"/>
-            <TextBox  Width="250"  Margin="10,10,0,10"  >              
+            <TextBox Text="{Binding ViewModel.LabelAndPrinterModel.PrinterName}"  Width="250"  Margin="10,10,0,10"  >              
             </TextBox>
         </StackPanel>
         <StackPanel Grid.Row="2"  Orientation="Horizontal" Margin="20,0,0,0">
             <ui:TextBlock Text="打印机描述："   VerticalAlignment="Center"  Margin="10,20,0,20"/>
-            <TextBox  Width="250"  Margin="10,10,0,10"  >              
+            <TextBox  Text="{Binding ViewModel.LabelAndPrinterModel.PrinterDescription}"  Width="250"  Margin="10,10,0,10"  >              
             </TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3"  Orientation="Horizontal" Margin="20,0,0,0">
             <ui:TextBlock Text="打印机地址："   VerticalAlignment="Center"  Margin="10,20,0,20"/>
-            <TextBox  Width="250"  Margin="10,10,0,10"  >              
+            <TextBox  Text="{Binding ViewModel.LabelAndPrinterModel.PrinterAddress}"   Width="250"  Margin="10,10,0,10"  >              
             </TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4"  Orientation="Horizontal" Margin="10,0,0,0">
-            <ui:Button Content="取消"  Width="150" Appearance="Primary" Margin="10,20,0,20"/>
-            <ui:Button Content="保存"  Width="150" Appearance="Primary" Margin="50,20,0,20"/>
+            <ui:Button Command="{Binding ViewModel.CloseWindow}" Content="取消"  Width="150" Appearance="Primary" Margin="10,20,0,20"/>
+            <ui:Button Command="{Binding ViewModel.AddPrinter}" Content="保存"  Width="150" Appearance="Primary" Margin="50,20,0,20"/>
         </StackPanel>
 
         

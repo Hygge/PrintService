@@ -12,8 +12,10 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using PrintService.Utils;
 
 namespace PrintService.ViewModels
 {
@@ -32,6 +34,9 @@ namespace PrintService.ViewModels
         public ICommand AddLabel { get; }
         //添加打印模板
         public ICommand AddLableTemplate { get; }
+        
+        public ICommand Refresh { get; }
+        public ICommand Print { get; }
 
         private string ip ;
         public string Ip
@@ -96,10 +101,20 @@ namespace PrintService.ViewModels
             set =>SetProperty(ref printName, value);
         }
 
+        private string logs;
+
+        public string Logs
+        {
+            get => logs;
+            set => SetProperty(ref logs, value);
+        }
+
+        private StringBuilder sb = new StringBuilder();
+
         public MainWindowViewModel()
         {
             //动态配置界面加载日志，界面获取日志
-            string logPattern = "【%date{yyyy-MM-dd HH:mm:ss}】: %message";
+            string logPattern = "【%date{yyyy-MM-dd HH:mm:ss}】：%message";
             CusLogAppender logAppender = new CusLogAppender() { Layout = new PatternLayout(logPattern) };
             logAppender.LogEvent += LogMessage;
             BasicConfigurator.Configure(logAppender);
@@ -110,6 +125,8 @@ namespace PrintService.ViewModels
             AddPrinter = new RelayCommand(addPrinter);
             AddLableTemplate = new RelayCommand(addLableTemplate);
             AddLabel = new RelayCommand(addLabel);
+            Refresh = new RelayCommand(refreshData);
+            Print = new RelayCommand(printLabel);
 
             // 获取本机静态ip
             refreshNetwork();
@@ -123,8 +140,29 @@ namespace PrintService.ViewModels
             getPrintNameList();
         }
 
-      
 
+        private void refreshData()
+        {
+            // 获取本机静态ip
+            refreshNetwork();
+
+            // 初始化获取标签名称集合
+            getLabelNameList();
+
+            //初始化获取打印机集合
+            getPrintNameList();
+        }
+
+        private void printLabel()
+        {
+            if (string.IsNullOrEmpty(labelName) || string.IsNullOrEmpty(printName))
+            {
+                return;
+            }
+            PrintUtil.FastReportPrintLabelObj(App.printBll.SelectByPrinterName(printName).address,
+                App.printBll.SelectByLabelName(labelName).path, new Dictionary<string, object>());
+            
+        }
 
         /// <summary>
         /// 获取标签名称集合
@@ -176,11 +214,6 @@ namespace PrintService.ViewModels
         {
             AddPrinterView print = new AddPrinterView();
             print.Show();
-            Printer printer = new Printer();
-           /* printer.name = "a12123";
-            printer.description = "测试打印机";
-            printer.address = "123";
-            App.printBll.InsertPrinter(printer);*/
         }
         private void addLabel()
         {
@@ -222,14 +255,16 @@ namespace PrintService.ViewModels
             if (message.Contains(LogHelper.WPF_SHOW_START))
             {
                 string log = message.Replace(LogHelper.WPF_SHOW_START, " ");
-                LogHelper.Info("消息显示界面");
-                Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+                if (sb.Length > 1500)
                 {
-                    // 确保在UI线程中
-                    // this.txtLog.AppendText(message + Environment.NewLine);
-                    LogHelper.Info("消息显示界面");
-
-                }));
+                    sb.Clear();
+                }
+                sb.Insert(0, "\n").Insert(0, log);
+            
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    Logs = sb.ToString();
+                });
             }
        
         }
