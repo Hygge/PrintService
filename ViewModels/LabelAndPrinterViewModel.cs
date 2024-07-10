@@ -82,6 +82,10 @@ namespace PrintService.ViewModels
         {
             currentWindow.Close();
         }
+        
+        /// <summary>
+        /// 先将上传文件保存在与标签做绑定 todo
+        /// </summary>
         private void saveFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -95,9 +99,9 @@ namespace PrintService.ViewModels
                 LabelAndPrinterModel.Path = Path.Combine(Environment.CurrentDirectory, App.configuration["labelDir"], fileName);
                 LabelAndPrinterModel.LabeFilelName = fileName;
                 // 存在文件先删除在保存
-                if(File.Exists(fileFullPath))
+                if(File.Exists(LabelAndPrinterModel.Path))
                 {
-                    File.Delete(fileFullPath);
+                    File.Delete(LabelAndPrinterModel.Path);
                 }
                 using FileStream readFile = new FileStream(fileFullPath, FileMode.Open, FileAccess.Read);
                 using FileStream writeFile = new FileStream(LabelAndPrinterModel.Path, FileMode.Create, FileAccess.Write);
@@ -105,7 +109,7 @@ namespace PrintService.ViewModels
 
             }catch (Exception ex)
             {
-                LogHelper.Error("上传标签文件失败", ex);
+                LogHelper.Error($"{LogHelper.WPF_SHOW_START} 上传标签文件失败", ex);
             }
 
         }
