@@ -159,8 +159,17 @@ namespace PrintService.ViewModels
             {
                 return;
             }
-            PrintUtil.FastReportPrintLabelObj(App.printBll.SelectByPrinterName(printName).address,
-                App.printBll.SelectByLabelName(labelName).path, new Dictionary<string, object>());
+
+            try
+            {
+                PrintUtil.FastReportPrintLabelObj(App.printBll.SelectByPrinterName(printName).address,
+                    App.printBll.SelectByLabelName(labelName).path, new Dictionary<string, object>());
+            }
+            catch (Exception exception)
+            {
+                LogHelper.Error($"{LogHelper.WPF_SHOW_START} 打印失败 {labelName}，失败原因：{exception.Message}", exception );
+            }
+  
             
         }
 

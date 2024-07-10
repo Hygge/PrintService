@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PrintService.Log;
 
 namespace PrintService
 {
@@ -37,6 +38,7 @@ namespace PrintService
                 app.MapControllers();
 
                 log.Info("》》》》》服务启动完成 🚀🚀🚀🚀🚀🚀🚀🚀 》》》》》");
+                log.Info($"{LogHelper.WPF_SHOW_START} 服务地址：http://{i}:{p}");
 
                 app.Run();
          
