@@ -17,7 +17,7 @@ namespace PrintService.Bll
 
         public void InitTable()
         {
-            var db = DbClientFactory.GetSqlSugarClient();
+           using var db = DbClientFactory.GetSqlSugarClient();
             var tables = db.DbMaintenance.GetTableInfoList(false);
             if(tables.Any(x => x.Name.Equals("Printer") || x.Name.Equals("LabelFileInfo")))
             {
@@ -29,47 +29,56 @@ namespace PrintService.Bll
 
         public LabelFileInfo SelectByLabelName(string name)
         {
-            return DbClientFactory.GetSqlSugarClient().Queryable<LabelFileInfo>().Where( x => x.name.Equals(name)).Single();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            return  db.Queryable<LabelFileInfo>().Where( x => x.name.Equals(name)).Single();
         }
 
         public Printer SelectByPrinterName(string name)
         {
-            return DbClientFactory.GetSqlSugarClient().Queryable<Printer>().Where( x => x.name.Equals(name)).Single();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            return db.Queryable<Printer>().Where( x => x.name.Equals(name)).Single();
         }
 
         public List<LabelFileInfo> SelectLabelFileList()
         {
-           return DbClientFactory.GetSqlSugarClient().Queryable<LabelFileInfo>().ToList();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            return db.Queryable<LabelFileInfo>().ToList();
         }
 
 
         public void DelLabelFile(int id)
         {
-            DbClientFactory.GetSqlSugarClient().Deleteable<LabelFileInfo>().Where(x => id == x.id).ExecuteCommand();
+            using var db = DbClientFactory.GetSqlSugarClient(); 
+            db.Deleteable<LabelFileInfo>().Where(x => id == x.id).ExecuteCommand();
         }
 
         public void InsertLabelFile(LabelFileInfo labelFileInfo)
         {
-            DbClientFactory.GetSqlSugarClient().Insertable<LabelFileInfo> (labelFileInfo).ExecuteCommand();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            db.Insertable<LabelFileInfo> (labelFileInfo).ExecuteCommand();
         }
 
         public List<Printer> SelectPrinterList()
         {
-            return DbClientFactory.GetSqlSugarClient().Queryable<Printer>().ToList();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            return db.Queryable<Printer>().ToList();
         }
 
         public void DelPrinter(int id)
         {
-            DbClientFactory.GetSqlSugarClient().Deleteable<Printer>().Where(x => id == x.id).ExecuteCommand();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            db.Deleteable<Printer>().Where(x => id == x.id).ExecuteCommand();
         }
         public void InsertPrinter(Printer printer)
         {
-            DbClientFactory.GetSqlSugarClient().Insertable<Printer>(printer).ExecuteCommand();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            db.Insertable<Printer>(printer).ExecuteCommand();
         }
 
         public void UpdatePrinter(Printer printer)
         {
-            DbClientFactory.GetSqlSugarClient().Updateable<Printer>(printer).ExecuteCommand();
+            using var db = DbClientFactory.GetSqlSugarClient();
+            db.Updateable<Printer>(printer).ExecuteCommand();
         }
 
 
