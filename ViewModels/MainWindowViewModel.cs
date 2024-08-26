@@ -146,9 +146,11 @@ namespace PrintService.ViewModels
             // 获取本机静态ip
             refreshNetwork();
 
+            LabelNameList.Clear();
             // 初始化获取标签名称集合
             getLabelNameList();
 
+            printNameList.Clear();
             //初始化获取打印机集合
             getPrintNameList();
         }
@@ -199,11 +201,16 @@ namespace PrintService.ViewModels
         //启动服务
         private void openWebServer()
         {
+            if (!IsEnabled)
+            {
+                LogHelper.Info(LogHelper.WPF_SHOW_START + "web服务已开启了=====");
+                return;
+            }
 
             LogHelper.Info(LogHelper.WPF_SHOW_START + "正在开启web服务=====");
             WebStartup.StartServer(Ip, Port);
             IsEnabled = false;
-            LogHelper.Info(LogHelper.WPF_SHOW_START + "启动web服务完成 🚀 🚀 🚀 》》》》》》》》》");
+            LogHelper.Info(LogHelper.WPF_SHOW_START + "启动web服务完成 🚀 🚀 🚀 ");
         }
         //停止服务
         private void stopServer()
@@ -212,7 +219,7 @@ namespace PrintService.ViewModels
             {
                 WebStartup.StopServer();
                 IsEnabled = true;
-                LogHelper.Info(LogHelper.WPF_SHOW_START + "停止web服务完成 🚀 🚀 🚀 》》》》》》》");
+                LogHelper.Info(LogHelper.WPF_SHOW_START + "停止web服务完成 🚀 🚀 🚀");
             }
           
         }
@@ -250,10 +257,10 @@ namespace PrintService.ViewModels
             try
             {
                 App.printBll.InitTable();
-                LogHelper.Info(LogHelper.WPF_SHOW_START + " 🚀 🚀 🚀 数据库初始化完成》》》》》》》》》》》》");
+                LogHelper.Info(LogHelper.WPF_SHOW_START + " 🚀 🚀 🚀 数据库初始化完");
             }catch(Exception ex)
             {
-                LogHelper.Error(LogHelper.WPF_SHOW_START + " 😭 😭 😭 数据库初始失败》》》》》》》》》》》》", ex);
+                LogHelper.Error(LogHelper.WPF_SHOW_START + " 😭 😭 😭 数据库初始失败", ex);
             }
            
         }
