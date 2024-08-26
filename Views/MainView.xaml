@@ -8,7 +8,7 @@
         xmlns:tray="http://schemas.lepo.co/wpfui/2022/xaml/tray"    
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-       Title="Window1" Height="550" Width="800" 
+       Title="标签打印上位" Height="550" Width="800" 
     >
 
     <Grid>
@@ -27,7 +27,7 @@
         <ui:TitleBar
              Title="打印服务"
              Grid.Row="0" Grid.ColumnSpan="3"
-             Icon="pack://application:,,,/WpfUi;component/assert/favicon.ico" />
+             Icon="pack://application:,,,/WpfUi;component/asset/print.png" />
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,0">
             <ui:TextBlock Text="服务IP："   VerticalAlignment="Center"  Margin="10,20,0,20"/>
             <ComboBox IsEditable="True" Width="150"  Margin="10,20,0,20"  SelectedItem="{Binding ViewModel.Ip}"  ItemsSource="{Binding ViewModel.IpList}"  >
@@ -38,8 +38,8 @@
             <ui:NumberBox Text="{Binding ViewModel.Port}"  Width="150"  Margin="10,20,0,20"  PlaceholderText="请输入"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="40,0,0,0">
-            <ui:Button Command="{Binding ViewModel.OpenServer}" Content="启动服务"  Margin="20,20,0,20" Appearance="Success"/>
-            <ui:Button Command="{Binding ViewModel.StopServer}" Content="停止服务"  Margin="20,20,0,20" Appearance="Danger"/>
+            <ui:Button Command="{Binding ViewModel.OpenServer}" Foreground="White" Content="启动服务"  Margin="20,20,0,20" Appearance="Success"/>
+            <ui:Button Command="{Binding ViewModel.StopServer}"  Foreground="White" Content="停止服务"  Margin="20,20,0,20" Appearance="Danger"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,0">
