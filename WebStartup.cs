@@ -39,6 +39,7 @@ namespace PrintService
 
                 log.Info("》》》》》服务启动完成 🚀🚀🚀🚀🚀🚀🚀🚀 》》》》》");
                 log.Info($"{LogHelper.WPF_SHOW_START} 服务地址：http://{i}:{p}");
+                log.Info($"{LogHelper.WPF_SHOW_START} 尝试访问打印机列表地址：http://{i}:{p}/Print/printerList");
 
                 app.Run();
          

@@ -50,6 +50,7 @@ namespace PrintService.ViewModels
                 printer.name = LabelAndPrinterModel.PrinterName ;
                 printer.description = LabelAndPrinterModel.PrinterDescription ;
                 App.printBll.InsertPrinter(printer);
+                LogHelper.Info(LogHelper.WPF_SHOW_START + "添加打印机成功：" + printer.name);
             }
             catch (Exception ex)
             {

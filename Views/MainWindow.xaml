@@ -6,227 +6,246 @@
         xmlns:local="clr-namespace:PrintService"
         mc:Ignorable="d"
         Title="MainWindow"
-        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-        Height="669"
-        Width="998">
+        WindowStyle="None"
+         Background="Transparent"
+         AllowsTransparency="True"
+         ResizeMode="NoResize"
+         WindowStartupLocation="CenterScreen"
+        Height="550"
+        Width="1000"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        >
     <Window.Resources>
-        <!--下拉列表样式-->
-        <Style TargetType="ComboBox"
-               x:Key="cbbip">
-            <Setter Property="Width"
-                    Value="180" />
-            <Setter Property="Height"
-                    Value="36" />
-            <Setter Property="Text"
-                    Value="请选择服务器IP" />
-        </Style>
-        <!--端口输入框样式-->
-        <Style TargetType="TextBox"
-               x:Key="txtport">
-            <Setter Property="Width"
-                    Value="173" />
-            <Setter Property="Height"
-                    Value="36" />
-            <Setter Property="Text"
-                    Value="请输入端口，默认8888" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="10">
-                            <!-- 设置圆角半径 -->
-                            <ScrollViewer x:Name="PART_ContentHost" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!--按钮样式-->
-        <Style TargetType="Button"
-               x:Key="btn">
-            <Setter Property="Width"
-                    Value="112" />
-            <Setter Property="Height"
-                    Value="40" />
-            <Setter Property="Background"
-                    Value="#336FFF" />
-            <Setter Property="Foreground"
-                    Value="White" />
-        </Style>
-        <!--测试打印按钮样式-->
-        <Style TargetType="Button"
-               x:Key="btntest">
-            <Setter Property="Width"
-                    Value="157" />
-            <Setter Property="Height"
-                    Value="40" />
-            <Setter Property="Background"
-                    Value="#336FFF" />
-            <Setter Property="Foreground"
-                    Value="White" />
-        </Style>
-        <!--输入框样式-->
-        <Style TargetType="TextBlock"
-               x:Key="logTxt">
-            <Setter Property="Background"
-                    Value="#C4C4C4" />
-            <Setter Property="Width"
-                    Value="492" />
-            <Setter Property="Height"
-                    Value="285" />
-            <Setter Property="Margin"
-                    Value="49" />
-        </Style>
-        <!--添加按钮样式-->
-        <Style TargetType="Button"
-               x:Key="btnadd">
-            <Setter Property="Width"
-                    Value="264" />
-            <Setter Property="Height"
-                    Value="40" />
-            <Setter Property="Background"
-                    Value="#336FFF" />
-        </Style>
+       
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <ComboBox Grid.Row="0"
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            Opacity="0.95"
+        >
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="PaleGoldenrod" Offset="0" />
+                <GradientStop Color="BlanchedAlmond" Offset="0.75" />
+                <GradientStop Color="Pink" Offset="1" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#78e08f" Offset="0" />
+                <GradientStop Color="#82ccdd" Offset="0.75" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260" />
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="240" />
+                <ColumnDefinition Width="240"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Column="0" Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Image Margin="5,2,0,0" Source="/asset/print.png" />
+            </StackPanel>
+            
+            <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnMinimiize"
+                  BorderThickness="0"
+                  Content="-"
+                  Foreground="White"
+                  FontFamily="Montserrat"
+                  Cursor="Hand"
+                  FontSize="16"
+                  Click="btnMinimiize_Click"
+                            Margin="0,0 20,0"
+                  >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#3498db" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#3481db" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" CornerRadius="9" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"  />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+                <Button x:Name="btnClose"
+                  BorderThickness="0"
+                  Content="X"
+                  FontSize="12"
+                  Foreground="White"
+                  FontFamily="Montserrat"
+                  Cursor="Hand"
+                  Click="btnClose_Click"
+                  Margin="0,0,10,0"
+                  >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#DA34AE" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Red" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="20" Height="20" CornerRadius="9" Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"  HorizontalAlignment="Center"  />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+            </StackPanel>
+
+
+            <ComboBox Grid.Row="1"
                   Grid.Column="0"
-                  HorizontalContentAlignment="Center"
-                  VerticalContentAlignment="Center"
                   ItemsSource="{Binding ViewModel.IpList}"
                   SelectedItem="{Binding ViewModel.Ip, Mode=TwoWay}"
-                  Style="{StaticResource cbbip}">
-        </ComboBox>
-        <TextBox Grid.Row="0"
+                  Height="36"  Width="180"
+                  Foreground="Red"
+                      >
+            </ComboBox>
+            <TextBox Grid.Row="1"
                  Grid.Column="1"
                  HorizontalContentAlignment="Center"
                  VerticalContentAlignment="Center"
                  Text="{Binding ViewModel.Port}"
-                 Style="{StaticResource txtport}">
-        </TextBox>
-        <Button Grid.Row="0"
+                     Width="180"  Height="36" 
+                 >
+            </TextBox>
+            <Button Grid.Row="1"
                 Grid.Column="2"
                 Content="启动服务"
                 Command="{Binding ViewModel.OpenServer}"
                 IsEnabled="{Binding ViewModel.IsEnabled}"
-                x:Name="openBtn"
-                Style="{StaticResource btn}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Grid.Row="0"
+                x:Name="openBtn" Width="158" Margin="43,13,0,0" VerticalAlignment="Top"
+               >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="1"
                 Grid.Column="3"
                 Content="停止服务"
                 Command="{Binding ViewModel.StopServer}"                
-                x:Name="stopBtn"
-                Style="{StaticResource btn}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-                <Style TargetType="Button">
-                    <Style.Triggers>
-                         <!--数据触发器，监控openBtn的IsPressed属性--> 
-                        <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="True">
-                             <!--当openBtn被按下时，禁用stopBtn--> 
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                         <!--可选：添加另一个触发器来在openBtn未被按下的时候启用stopBtn--> 
-                        <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="False">
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <ComboBox Grid.Row="1"
+                x:Name="stopBtn" Width="162" Margin="46,12,0,0" VerticalAlignment="Top"
+               >
+                <!--<Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            --><!--数据触发器，监控openBtn的IsPressed属性--><!--
+                            <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="True">
+                                --><!--当openBtn被按下时，禁用stopBtn--><!--
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            --><!--可选：添加另一个触发器来在openBtn未被按下的时候启用stopBtn--><!--
+                            <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="False">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>-->
+            </Button>
+            <ComboBox Grid.Row="2"
                   Grid.Column="0"
-                  HorizontalContentAlignment="Center"
-                  VerticalContentAlignment="Center"
                   ItemsSource="{Binding ViewModel.LabelNameList}"
                   SelectedItem="{Binding ViewModel.LabelName, Mode=TwoWay}"
-                  Style="{StaticResource cbbip}" />
-        <ComboBox Grid.Row="1"
+                    Height="36"  Width="180" />
+            <ComboBox Grid.Row="2"
                   Grid.Column="1"
-                  HorizontalContentAlignment="Center"
-                  VerticalContentAlignment="Center"
                   ItemsSource="{Binding ViewModel.PrintNameList}"
                   SelectedItem="{Binding ViewModel.PrintName, Mode=TwoWay}"
-                  Style="{StaticResource cbbip}" />
-        <Button Grid.Row="1"
+                    Height="36"  Width="180" />
+            <Button Grid.Row="2"
                 Grid.Column="2"    
-                Content="测试打印"
-                Style="{StaticResource btntest}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Grid.Row="1"
+                Content="测试打印" Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center"
+                >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="2"
                 Grid.Column="3"
-                Content="刷        新"
+                Content="刷        新" Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center"
                
-                Style="{StaticResource btntest}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <TextBlock Grid.ColumnSpan="2"
-                   Grid.RowSpan="2"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   Style="{StaticResource logTxt}">
-        </TextBlock>
-        <Button Grid.Row="2"
+               >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Border  Grid.ColumnSpan="2"           
+                       Grid.RowSpan="2"     
+                     Grid.Column="0"
+                       Grid.Row="3"
+                     CornerRadius="5" 
+                     Background="Transparent"
+                     Margin="20"
+                     >
+                <TextBox Margin="5" TextWrapping="Wrap" Text="{Binding ViewModel.Logs}"  >
+                </TextBox>
+            </Border>
+            
+            <Button Grid.Row="3"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Content="添加打印机列表"
                 Command="{Binding ViewModel.AddPrinter}"
-                Style="{StaticResource btnadd}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Grid.Row="3"
+               Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Grid.Row="4"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Content="添加模板列表"
                 Command="{Binding ViewModel.AddLableTemplate}"
-                Style="{StaticResource btnadd}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius"
-                            Value="20"></Setter>
-                </Style>
-            </Button.Resources>
-        </Button>
-    </Grid>
+                  Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center" 
+               >
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius"
+                            Value="10"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+        
+    </Border>
+
 </Window>
