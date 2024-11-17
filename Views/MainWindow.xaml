@@ -137,40 +137,16 @@
                 Content="启动服务"
                 Command="{Binding ViewModel.OpenServer}"
                 IsEnabled="{Binding ViewModel.IsEnabled}"
-                x:Name="openBtn" Width="158" Margin="43,13,0,0" VerticalAlignment="Top"
+                Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center"
                >
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius"
-                            Value="10"></Setter>
-                    </Style>
-                </Button.Resources>
             </Button>
             <Button Grid.Row="1"
                 Grid.Column="3"
                 Content="停止服务"
                 Command="{Binding ViewModel.StopServer}"                
-                x:Name="stopBtn" Width="162" Margin="46,12,0,0" VerticalAlignment="Top"
+                Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center"
                >
-                <!--<Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius"
-                            Value="10"></Setter>
-                    </Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            --><!--数据触发器，监控openBtn的IsPressed属性--><!--
-                            <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="True">
-                                --><!--当openBtn被按下时，禁用stopBtn--><!--
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </DataTrigger>
-                            --><!--可选：添加另一个触发器来在openBtn未被按下的时候启用stopBtn--><!--
-                            <DataTrigger Binding="{Binding IsPressed, ElementName=openBtn}" Value="False">
-                                <Setter Property="IsEnabled" Value="True"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Resources>-->
+              
             </Button>
             <ComboBox Grid.Row="2"
                   Grid.Column="0"
@@ -223,12 +199,7 @@
                 Content="添加打印机列表"
                 Command="{Binding ViewModel.AddPrinter}"
                Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius"
-                            Value="10"></Setter>
-                    </Style>
-                </Button.Resources>
+               
             </Button>
             <Button Grid.Row="4"
                 Grid.Column="2"
@@ -237,12 +208,7 @@
                 Command="{Binding ViewModel.AddLableTemplate}"
                   Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center" 
                >
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius"
-                            Value="10"></Setter>
-                    </Style>
-                </Button.Resources>
+               
             </Button>
         </Grid>
         
