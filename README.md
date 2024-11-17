@@ -1,7 +1,6 @@
 ## 界面
 
-![MianWindow](/asset/MianWindow.png)
-
+![image](https://github.com/user-attachments/assets/a601598c-2bf6-4538-a90d-7a66739c5de9)
 
 
 ## 项目架构
