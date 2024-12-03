@@ -18,7 +18,7 @@
     <Window.Resources>
        
     </Window.Resources>
-    <Border CornerRadius="10"
+    <Border CornerRadius="20"
             BorderThickness="1"
             Opacity="0.95"
         >
@@ -36,7 +36,7 @@
             </LinearGradientBrush>
         </Border.Background>
 
-        <Grid>
+        <Grid  Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="60" />
@@ -205,7 +205,7 @@
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 Content="添加模板列表"
-                Command="{Binding ViewModel.AddLableTemplate}"
+                Command="{Binding ViewModel.AddLabel}"
                   Width="180"  Height="36" VerticalAlignment="Center" HorizontalAlignment="Center" 
                >
                
